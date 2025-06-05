@@ -1,10 +1,87 @@
 [
   {
-    "objectID": "01_index_Summary.html",
-    "href": "01_index_Summary.html",
-    "title": "Sophillium",
+    "objectID": "11_create_website.html",
+    "href": "11_create_website.html",
+    "title": "ウェブサイトの作り方（詳解版）",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Gitはソースコードやドキュメントの変更履歴を管理するツールです。\n\nGit公式サイトからOSに合ったインストーラーをダウンロードし、インストールしてください。\n\n\n\n\n\nRは統計解析・データ分析向けのプログラミング言語です。\nCRAN（The Comprehensive R Archive Network）からOSに合ったインストーラーを入手してインストールします。\nインストール後、コマンドラインまたはRStudioからRを起動できることを確認してください。\n\n\n\n\n\nRStudioはRを使いやすくする統合開発環境（IDE）です。\nRStudio公式サイトからインストーラーを取得しインストール。\n\n\n\n\n\nQuartoはMarkdown形式で文章やサイトを生成するツールです。\nQuarto公式サイトからインストーラーをダウンロードしインストール。\nRStudioのターミナルやコマンドラインで以下を実行し、動作確認します。\n\n\n\n\n\n\nGitHub公式サイトで無料アカウントを作成。\nメールアドレスが必要です。管理しやすい専用のメール（例：Gmail）を新規作成することを推奨します。\nアカウント作成後、ログインできることを確認してください。\n\n\n\n\n\nGitHubにログインした状態で画面右上の「+」→「New repository」をクリック。\nリポジトリ名（例：Sophillium）を入力。\nPublic を選択（無料アカウントでも公開リポジトリは作成可能）。\n「Add a README file」にチェックを入れておくと説明文を書けて便利。\n「Create repository」をクリック。\n\n\n\n\n\nRStudioを起動。\nメニューから「File」→「New Project」→「New Directory」→「Quarto Website」を選択。\nプロジェクト名（例：Sophillium）を入力。\n「Browse」ボタンから好きなフォルダに保存場所を選択。\n「Create Project」を押すと、新しいQuartoウェブサイトプロジェクトが作成されます。\n\n\n\n\n\nプロジェクトのルートにある _quarto.yml はウェブサイト全体の設定ファイルです。\n例えば以下のように書きます。\n\n\noutput-dir はビルド後の静的サイトのファイル置き場で、GitHub Pagesで公開したいフォルダ名と一致させます。(docsでいい)\n\n\n\nnavbar でメニューのリンクを設定します。リンク先ファイル名は実際の .qmd ファイル名と完全に一致させる必要があります。\nページ作成（.qmdファイル）\n\n\n\n\n\n\n\n各ページは .qmd 拡張子のMarkdownファイルで作成します。\n\n\n\n例：01_index.qmd、02_about.qmd のように番号を付けて管理すると順序がわかりやすいです。\nファイルの中身はMarkdown記法で文章を書き、必要に応じてRコードチャンクを埋め込み可能です。\n\n\n# x軸の値を生成\nx &lt;- seq(-4, 4, length=200)\n\n# 正規分布（平均0、標準偏差1）の確率密度関数\ny_norm &lt;- dnorm(x, mean=0, sd=1)\n\n# ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）\nx_gamma &lt;- seq(0, 10, length=200)\ny_gamma &lt;- dgamma(x_gamma, shape=2, rate=1)\n\n# ベータ分布（shape1=2, shape2=5）\nx_beta &lt;- seq(0, 1, length=200)\ny_beta &lt;- dbeta(x_beta, shape1=2, shape2=5)\n\n# プロット設定\npar(mfrow=c(3,1), mar=c(4,4,2,1))  # 3行1列に並べる\n\n# 正規分布のプロット\nplot(x, y_norm, type=\"l\", col=\"blue\", lwd=2, main=\"標準正規分布\", ylab=\"密度\", xlab=\"x\")\n\n# ガンマ分布のプロット\nplot(x_gamma, y_gamma, type=\"l\", col=\"red\", lwd=2, main=\"ガンマ分布 (shape=2, rate=1)\", ylab=\"密度\", xlab=\"x\")\n\n# ベータ分布のプロット\nplot(x_beta, y_beta, type=\"l\", col=\"green\", lwd=2, main=\"ベータ分布 (shape1=2, shape2=5)\", ylab=\"密度\", xlab=\"x\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n個別ページのプレビュー\nRStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラウザにプレビューが表示されます。\n文章やレイアウトの確認に便利です。\nサイト全体のビルド\nターミナル（RStudioのターミナルまたはコマンドプロンプト）を開き、プロジェクトのルートで以下を実行。\n\n\nquarto render\n\n\n_quarto.yml で指定した output-dir フォルダ（例：docs）にサイトのHTMLなどのファイル一式が生成されます。\n\n\n\n\n\n\nGitの初期化（初回のみ）\nRStudioの「Git」タブが表示されていない場合、Git管理が有効になっていません。\nプロジェクトのルートフォルダでターミナルを開き、以下を実行します。\n\n\ngit init\ngit remote add origin https://github.com/あなたのユーザー名/リポジトリ名.git\n\n\nRStudioでGit操作\nRStudioの右上の「Git」タブから変更ファイルのステージング（チェックボックスにチェック）、コミットメッセージ入力、コミット、プッシュができます。\n初回プッシュ時はパスワードの代わりにGitHubで作成したパーソナルアクセストークン（PAT）を使用することが多いです。\nGitHub Pagesの設定\nGitHubのリポジトリ画面にアクセスし、「Settings」→「Pages」へ移動。\n「Source」のプルダウンで「Branch: main」「Folder: /docs」を選択し、「Save」ボタンを押します。\n数分待つとウェブサイトが https://あなたのユーザー名.github.io/リポジトリ名/ で公開されます。\n\n\n\n\n\nローカルで .qmd ファイルを編集。\nRStudioで quarto render を実行しサイトをビルド（または「Render」ボタンで個別に確認）。\n変更をGitでコミット。\n\ngit add .\ngit commit -m “Update website content”\n\nGitHubにプッシュ。 &gt; git push origin main\nGitHub Pagesが自動的に更新されるのを待つ。\n\n\n\n\n\nリンク先ファイル名の不一致\n\n\n\n_quarto.yml のナビゲーションと .qmd のファイル名が違うとエラーになります。\n\nファイル名を変更したら必ず _quarto.yml も修正してください。\n\n\nGitのpushが拒否される\n\n\n\nリモートリポジトリに自分のローカルにない変更がある場合、git push が失敗します。\n\n先に以下を実行し、変更を取り込んでください。\n\n\ngit pull origin main\n\n\nコンフリクトがあれば手動で解消し、再度pushします。\n\n\nGitHub Pagesに成果物が表示されない\n\n\n\nGitHubのPages設定が正しいか（ブランチとフォルダ）必ず確認してください。\n\nQuartoのビルド成果物が指定フォルダにあるかも重要です。\n\n\n\n\n\n\nGit, R, RStudio, Quartoの準備 → GitHubアカウント作成\n\nGitHubリポジトリ作成 → RStudioでQuartoプロジェクト作成\n\n_quarto.yml編集でサイト設定 → .qmdでページ作成\n\nquarto renderでサイト生成 → Gitでコミット・プッシュ\n\nGitHub Pages設定で公開完了\n\nこの流れであなたのウェブサイトが自分で作れて、GitHubを使った公開まで自動化できます！\n\n参考リンク\n- Git公式サイト：https://git-scm.com/\n- R公式サイト：https://cran.r-project.org/\n- RStudio公式サイト：https://posit.co/download/rstudio-desktop/\n- Quarto公式サイト：https://quarto.org/docs/\n- GitHub公式サイト：https://github.com/\n- GitHub Pagesの使い方：https://docs.github.com/en/pages/getting-started-with-github-pages"
+  },
+  {
+    "objectID": "11_create_website.html#必要なツールのインストールと準備",
+    "href": "11_create_website.html#必要なツールのインストールと準備",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "Gitはソースコードやドキュメントの変更履歴を管理するツールです。\n\nGit公式サイトからOSに合ったインストーラーをダウンロードし、インストールしてください。\n\n\n\n\n\nRは統計解析・データ分析向けのプログラミング言語です。\nCRAN（The Comprehensive R Archive Network）からOSに合ったインストーラーを入手してインストールします。\nインストール後、コマンドラインまたはRStudioからRを起動できることを確認してください。\n\n\n\n\n\nRStudioはRを使いやすくする統合開発環境（IDE）です。\nRStudio公式サイトからインストーラーを取得しインストール。\n\n\n\n\n\nQuartoはMarkdown形式で文章やサイトを生成するツールです。\nQuarto公式サイトからインストーラーをダウンロードしインストール。\nRStudioのターミナルやコマンドラインで以下を実行し、動作確認します。"
+  },
+  {
+    "objectID": "11_create_website.html#githubアカウントの作成",
+    "href": "11_create_website.html#githubアカウントの作成",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "GitHub公式サイトで無料アカウントを作成。\nメールアドレスが必要です。管理しやすい専用のメール（例：Gmail）を新規作成することを推奨します。\nアカウント作成後、ログインできることを確認してください。"
+  },
+  {
+    "objectID": "11_create_website.html#githubリポジトリの作成",
+    "href": "11_create_website.html#githubリポジトリの作成",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "GitHubにログインした状態で画面右上の「+」→「New repository」をクリック。\nリポジトリ名（例：Sophillium）を入力。\nPublic を選択（無料アカウントでも公開リポジトリは作成可能）。\n「Add a README file」にチェックを入れておくと説明文を書けて便利。\n「Create repository」をクリック。"
+  },
+  {
+    "objectID": "11_create_website.html#rstudioでquartoプロジェクトを作成",
+    "href": "11_create_website.html#rstudioでquartoプロジェクトを作成",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "RStudioを起動。\nメニューから「File」→「New Project」→「New Directory」→「Quarto Website」を選択。\nプロジェクト名（例：Sophillium）を入力。\n「Browse」ボタンから好きなフォルダに保存場所を選択。\n「Create Project」を押すと、新しいQuartoウェブサイトプロジェクトが作成されます。"
+  },
+  {
+    "objectID": "11_create_website.html#quarto.yml-ファイルの編集",
+    "href": "11_create_website.html#quarto.yml-ファイルの編集",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "プロジェクトのルートにある _quarto.yml はウェブサイト全体の設定ファイルです。\n例えば以下のように書きます。\n\n\noutput-dir はビルド後の静的サイトのファイル置き場で、GitHub Pagesで公開したいフォルダ名と一致させます。(docsでいい)\n\n\n\nnavbar でメニューのリンクを設定します。リンク先ファイル名は実際の .qmd ファイル名と完全に一致させる必要があります。\nページ作成（.qmdファイル）"
+  },
+  {
+    "objectID": "11_create_website.html#ページ作成",
+    "href": "11_create_website.html#ページ作成",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "各ページは .qmd 拡張子のMarkdownファイルで作成します。\n\n\n\n例：01_index.qmd、02_about.qmd のように番号を付けて管理すると順序がわかりやすいです。\nファイルの中身はMarkdown記法で文章を書き、必要に応じてRコードチャンクを埋め込み可能です。\n\n\n# x軸の値を生成\nx &lt;- seq(-4, 4, length=200)\n\n# 正規分布（平均0、標準偏差1）の確率密度関数\ny_norm &lt;- dnorm(x, mean=0, sd=1)\n\n# ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）\nx_gamma &lt;- seq(0, 10, length=200)\ny_gamma &lt;- dgamma(x_gamma, shape=2, rate=1)\n\n# ベータ分布（shape1=2, shape2=5）\nx_beta &lt;- seq(0, 1, length=200)\ny_beta &lt;- dbeta(x_beta, shape1=2, shape2=5)\n\n# プロット設定\npar(mfrow=c(3,1), mar=c(4,4,2,1))  # 3行1列に並べる\n\n# 正規分布のプロット\nplot(x, y_norm, type=\"l\", col=\"blue\", lwd=2, main=\"標準正規分布\", ylab=\"密度\", xlab=\"x\")\n\n# ガンマ分布のプロット\nplot(x_gamma, y_gamma, type=\"l\", col=\"red\", lwd=2, main=\"ガンマ分布 (shape=2, rate=1)\", ylab=\"密度\", xlab=\"x\")\n\n# ベータ分布のプロット\nplot(x_beta, y_beta, type=\"l\", col=\"green\", lwd=2, main=\"ベータ分布 (shape1=2, shape2=5)\", ylab=\"密度\", xlab=\"x\")"
+  },
+  {
+    "objectID": "11_create_website.html#プレビューとビルド",
+    "href": "11_create_website.html#プレビューとビルド",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "個別ページのプレビュー\nRStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラウザにプレビューが表示されます。\n文章やレイアウトの確認に便利です。\nサイト全体のビルド\nターミナル（RStudioのターミナルまたはコマンドプロンプト）を開き、プロジェクトのルートで以下を実行。\n\n\nquarto render\n\n\n_quarto.yml で指定した output-dir フォルダ（例：docs）にサイトのHTMLなどのファイル一式が生成されます。"
+  },
+  {
+    "objectID": "11_create_website.html#githubとrstudioの連携設定",
+    "href": "11_create_website.html#githubとrstudioの連携設定",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "Gitの初期化（初回のみ）\nRStudioの「Git」タブが表示されていない場合、Git管理が有効になっていません。\nプロジェクトのルートフォルダでターミナルを開き、以下を実行します。\n\n\ngit init\ngit remote add origin https://github.com/あなたのユーザー名/リポジトリ名.git\n\n\nRStudioでGit操作\nRStudioの右上の「Git」タブから変更ファイルのステージング（チェックボックスにチェック）、コミットメッセージ入力、コミット、プッシュができます。\n初回プッシュ時はパスワードの代わりにGitHubで作成したパーソナルアクセストークン（PAT）を使用することが多いです。\nGitHub Pagesの設定\nGitHubのリポジトリ画面にアクセスし、「Settings」→「Pages」へ移動。\n「Source」のプルダウンで「Branch: main」「Folder: /docs」を選択し、「Save」ボタンを押します。\n数分待つとウェブサイトが https://あなたのユーザー名.github.io/リポジトリ名/ で公開されます。"
+  },
+  {
+    "objectID": "11_create_website.html#更新時の作業手順",
+    "href": "11_create_website.html#更新時の作業手順",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "ローカルで .qmd ファイルを編集。\nRStudioで quarto render を実行しサイトをビルド（または「Render」ボタンで個別に確認）。\n変更をGitでコミット。\n\ngit add .\ngit commit -m “Update website content”\n\nGitHubにプッシュ。 &gt; git push origin main\nGitHub Pagesが自動的に更新されるのを待つ。"
+  },
+  {
+    "objectID": "11_create_website.html#トラブルシューティング注意点",
+    "href": "11_create_website.html#トラブルシューティング注意点",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "リンク先ファイル名の不一致\n\n\n\n_quarto.yml のナビゲーションと .qmd のファイル名が違うとエラーになります。\n\nファイル名を変更したら必ず _quarto.yml も修正してください。\n\n\nGitのpushが拒否される\n\n\n\nリモートリポジトリに自分のローカルにない変更がある場合、git push が失敗します。\n\n先に以下を実行し、変更を取り込んでください。\n\n\ngit pull origin main\n\n\nコンフリクトがあれば手動で解消し、再度pushします。\n\n\nGitHub Pagesに成果物が表示されない\n\n\n\nGitHubのPages設定が正しいか（ブランチとフォルダ）必ず確認してください。\n\nQuartoのビルド成果物が指定フォルダにあるかも重要です。"
+  },
+  {
+    "objectID": "11_create_website.html#まとめ",
+    "href": "11_create_website.html#まとめ",
+    "title": "ウェブサイトの作り方（詳解版）",
+    "section": "",
+    "text": "Git, R, RStudio, Quartoの準備 → GitHubアカウント作成\n\nGitHubリポジトリ作成 → RStudioでQuartoプロジェクト作成\n\n_quarto.yml編集でサイト設定 → .qmdでページ作成\n\nquarto renderでサイト生成 → Gitでコミット・プッシュ\n\nGitHub Pages設定で公開完了\n\nこの流れであなたのウェブサイトが自分で作れて、GitHubを使った公開まで自動化できます！\n\n参考リンク\n- Git公式サイト：https://git-scm.com/\n- R公式サイト：https://cran.r-project.org/\n- RStudio公式サイト：https://posit.co/download/rstudio-desktop/\n- Quarto公式サイト：https://quarto.org/docs/\n- GitHub公式サイト：https://github.com/\n- GitHub Pagesの使い方：https://docs.github.com/en/pages/getting-started-with-github-pages"
   },
   {
     "objectID": "01_index.html",
@@ -16,5 +93,12 @@
       "理念・洞察",
       "概要"
     ]
+  },
+  {
+    "objectID": "01_index_Summary.html",
+    "href": "01_index_Summary.html",
+    "title": "Sophillium",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
   }
 ]
