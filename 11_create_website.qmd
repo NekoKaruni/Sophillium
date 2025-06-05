@@ -64,6 +64,8 @@
 
 5.  「Create Project」を押すと、新しいQuartoウェブサイトプロジェクトが作成されます。
 
+    \*[私たちのR](https://www.jaysong.net/RBook/aboutr.html)を参考にRStudioの設定をすることをおすすめします
+
 ## 5. `_quarto.yml` ファイルの編集
 
 -   プロジェクトのルートにある `_quarto.yml` はウェブサイト全体の設定ファイルです。
@@ -234,4 +236,5 @@ GitHub Pagesが自動的に更新されるのを待つ。
 - RStudio公式サイト：<https://posit.co/download/rstudio-desktop/>\
 - Quarto公式サイト：<https://quarto.org/docs/>\
 - GitHub公式サイト：<https://github.com/>\
-- GitHub Pagesの使い方：<https://docs.github.com/en/pages/getting-started-with-github-pages>
+- GitHub Pagesの使い方：<https://docs.github.com/en/pages/getting-started-with-github-pages>\
+- 私たちのR：<https://www.jaysong.net/RBook/aboutr.html>　
