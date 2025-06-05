@@ -1,0 +1,37 @@
+project:
+  type: website
+
+website:
+  title: "Sophillium"
+  navbar:
+    left:
+      - href: index.qmd
+        text: 理念・洞察
+      - href: investment.qmd
+        text: 投資・市場
+      - href: economy_business.qmd
+        text: 経済・経営
+        
+    right:
+      - text: 作り方
+        href: create_website.qmd
+      - icon: github
+        href: https://github.com/NekoKaruni/Sophillium.git
+      - icon: info-circle
+        href: author.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    navbar:
+      fixed: top
+      sticky: true
+    sidebar:
+      collapse: true
+      float: true
+
+editor: visual

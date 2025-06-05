@@ -1,0 +1,4 @@
+---
+title: "マクロ経済学"
+author: "NukoKaruni"
+---

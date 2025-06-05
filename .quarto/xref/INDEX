@@ -1,0 +1,44 @@
+{
+  "index.qmd": {
+    "index.html": "c90f9f71"
+  },
+  "about.qmd": {
+    "about.html": "e739a7e6"
+  },
+  "12_Author.qmd": {
+    "12_Author.html": "82b43b81"
+  },
+  "01_index.qmd": {
+    "01_index.html": "52e05345"
+  },
+  "02_investment.qmd": {
+    "02_investment.html": "a020c619"
+  },
+  "03_economy_Business.qmd": {
+    "03_economy_Business.html": "13522440"
+  },
+  "11_create_website.qmd": {
+    "11_create_website.html": "811357bb"
+  },
+  "01_index_Summary.qmd": {
+    "01_index_Summary.html": "72d870a5"
+  },
+  "02_investment_Summary.qmd": {
+    "02_investment_Summary.html": "0760350a"
+  },
+  "03_economy_Business_Summary.qmd": {
+    "03_economy_Business_Summary.html": "25c27179"
+  },
+  "11_create_website_Summary.qmd": {
+    "11_create_website_Summary.html": "45dec499"
+  },
+  "12_Author_Summary.qmd": {
+    "12_Author_Summary.html": "f120f108"
+  },
+  "03_BusinessManagement.qmd": {
+    "03_BusinessManagement.html": "f220ad8a"
+  },
+  "03_MacroEconomics.qmd": {
+    "03_MacroEconomics.html": "a1010bad"
+  }
+}
