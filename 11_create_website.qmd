@@ -191,7 +191,17 @@ RStudioで quarto render を実行しサイトをビルド（または「Render�
 
 GitHubにプッシュ。 \> git push origin main
 
-GitHub Pagesが自動的に更新されるのを待つ。
+GitHub Pagesが自動的に更新されるのを待つ。\
+
+他の端末でリモートレポジトリの変更を行った際は競合を避けるためエラーになるので。レポジトリとローカルの内容を合わせてからPush
+
+ 1. 最新の変更をリモートから取得
+
+git pull origin main --rebase
+
+2.  コンフリクトがあれば解決し、なければそのままpush
+
+git push origin main
 
 ------------------------------------------------------------------------
 
