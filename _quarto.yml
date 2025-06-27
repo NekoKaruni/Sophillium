@@ -37,6 +37,9 @@ website:
           - href: 02_investment.qmd
             text: 概要
           - href: 02_investment_Summary.qmd
+          
+          - href: TOPIX.qmd
+            text: TOPIX
             text: 詳細解説
       - section: "経済・経営"
         contents:
