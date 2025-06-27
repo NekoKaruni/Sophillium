@@ -1,6 +1,7 @@
 ---
 title: "TOPIX"
 author: "NekoKaruni"
+format: html
 ---
 
 ```{r}
