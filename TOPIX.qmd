@@ -1,7 +1,10 @@
 ---
 title: "TOPIX"
 author: "NekoKaruni"
-format: html
+format:
+  html: 
+    toc: true
+    sidebar: true
 ---
 
 ```{r}
