@@ -5,7 +5,6 @@ project:
 website:
   title: "Sophillium"
   
-  
   navbar:
     left:
       - href: 01_index.qmd
@@ -26,29 +25,22 @@ website:
         
   sidebar:
     style: "floating"
-    collapse: true
+    collapse: false
     contents:
-      - section: "理念・洞察"
-        contents:
-          - href: 01_index.qmd
-            text: 概要
-      - section: "投資・市場"
-        contents:
-          - href: 02_investment.qmd
-            text: 概要
-          - href: 02_investment_Summary.qmd
-            text: 詳細解説
-          - href: TOPIX.qmd
-            text: TOPIX
-            
-      - section: "経済・経営"
-        contents:
-          - href: 03_economy_Business_Summary.qmd
-            text: 概要
-          - href: 03_MacroEconomics.qmd
-            text: マクロ経済学
-          - href: 03_BusinessManagement.qmd
-            text: 経営論      
+      - href: 01_index.qmd
+        text: 概要
+      - href: 02_investment.qmd
+        text: 概要
+      - href: 02_investment_Summary.qmd
+        text: 詳細解説
+      - href: TOPIX.qmd
+        text: TOPIX
+      - href: 03_economy_Business_Summary.qmd
+        text: 概要
+      - href: 03_MacroEconomics.qmd
+        text: マクロ経済学
+      - href: 03_BusinessManagement.qmd
+        text: 経営論      
         
    
 format:
