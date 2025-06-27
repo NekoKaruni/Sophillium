@@ -1,4 +1,7 @@
 ---
 title: "経営論"
 author: "NukoKaruni"
+format: html
 ---
+
+経営論

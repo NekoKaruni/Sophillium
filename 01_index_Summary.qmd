@@ -1,5 +1,6 @@
 ---
 title: "Sophillium"
+format: html
 ---
 
 This is a Quarto website.

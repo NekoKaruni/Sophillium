@@ -1,9 +1,11 @@
 {
-  "hash": "e8b6f1f6d5536e48a264a9c4f748f24a",
+  "hash": "4135fcf1d666bda55748de30b9635eaa",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Sophillium\"\n---\n\nThis is a Quarto website.\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n\n",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Sophillium\"\nformat: html\n---\n\nThis is a Quarto website.\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n\n",
+    "supporting": [
+      "01_index_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

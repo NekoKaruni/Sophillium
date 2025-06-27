@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: docs
+
 website:
   title: "Sophillium"
   
@@ -12,8 +13,6 @@ website:
         href: 02_investment.qmd
       - text: 経済・経営
         href: 03_economy_Business.qmd
-  
-    right:
       - text: 作り方
         href: 11_create_website.qmd
       - icon: github
@@ -21,38 +20,40 @@ website:
       - icon: info-circle
         href: 12_Author.qmd
 
-        
   sidebar:
-    style: "floating"
-    collapse: false
+    left:
+    style: "docked"
+    collapse-level: 1
+    search: true
     contents:
-      - text: 概要 
-        href: 01_index.qmd
-      - text: 概要
-        href: 02_investment.qmd
-      - text: 詳細解説
-        href: 02_investment_Summary.qmd
-      - text: TOPIX
-        href: TOPIX.qmd
-      - text: 概要
-        href: 03_economy_Business_Summary.qmd
-      - text: マクロ経済学
-        href: 03_MacroEconomics.qmd
-      - text: 経営論
-        href: 03_BusinessManagement.qmd
-              
-format:
-  html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.css
-    toc: true
-    navbar:
-      fixed: top
-      sticky: true
-    sidebar:
-      collapse: true
-      float: true
+    - section: "理念・洞察"
+      contents: 
+       - text: 概要 
+         href: 01_index.qmd
+    - section: "投資・市場"
+      contents: 
+       - text: 投資・市場 概要
+         href: 02_investment.qmd
+       - text: 詳細解説
+         href: 02_investment_Summary.qmd
+       - text: TOPIX
+         href: TOPIX.qmd
+    - section: "経済・経営"
+      contents: 
+       - text: 経済・経営 概要
+         href: 03_economy_Business_Summary.qmd
+       - text: マクロ経済学
+         href: 03_MacroEconomics.qmd
+       - text: 経営論
+         href: 03_BusinessManagement.qmd
 
+format: 
+  html: 
+    toc: true
+    css: styles.css 
+    margin:
+      top: 0.5in
+      bottom: 0.5in
+      left: 0.5in
+      right: 0.5in
 editor: visual
