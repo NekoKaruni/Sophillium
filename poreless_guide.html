@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.sng {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.def {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛穴レススキンケア・インタラクティブガイド</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #fdfbf7;
+            color: #4a4a4a;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid #c9a063;
+            color: #c9a063;
+        }
+
+        .routine-step::before {
+            content: '';
+            position: absolute;
+            left: -1.25rem;
+            top: 0.5rem;
+            bottom: -1.5rem;
+            width: 2px;
+            background: #e5e7eb;
+        }
+
+        .routine-step:last-child::before {
+            display: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <!-- Chosen Palette: Pearl & Silk (Warm Neutrals, Champagne Gold, Soft Mist Blue) -->
+    
+    <!-- Application Structure Plan: 
+        1. ヒーローセクション: マニュアルの目的を提示。
+        2. 製品マトリックス: 全7アイテムをインタラクティブなカードで表示。クリックで詳細（成分・効果）を切り替え。
+        3. 成分バランス分析: Chart.jsを使用して、このラインナップが「保湿」「キメ」「ハリ」「洗浄」のどの要素に強いかを可視化。
+        4. 3大攻めルール: 視覚的なステップバイステップ形式で、乳化などの重要テクニックを解説。
+        5. 動的ルーティンセレクター: 「朝」と「夜」をトグルで切り替え、その時に使うべき製品と順番を動的に表示。
+        この構造により、ユーザーは単なるリストを読むのではなく、自分の状況（今が朝か夜か）に合わせて必要な情報を即座に引き出せます。
+    -->
+
+    <!-- Visualization & Content Choices: 
+        - レーダーチャート (Chart.js): 7製品全体のカバー範囲（保湿・毛穴・ハリ・透明感）を可視化。
+        - 製品カード: グリッドレイアウトで各製品を整理し、JSで詳細表示を制御。
+        - ルーティンタイムライン: 垂直方向のステップ表示で、使う順番を直感的に。
+        - インタラクティブ・トグル: 朝/夜の切り替えでユーザーの混乱を防ぐ。
+        - NO SVG/Mermaid: アイコンはUnicodeとCSS装飾のみで構築。
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="sticky top-0 z-50 glass-card mx-4 mt-4 px-6 py-4 flex justify-between items-center shadow-sm">
+        <h1 class="text-lg font-bold text-gray-800">Poreless Guide</h1>
+        <div class="hidden md:flex space-x-6 text-sm font-medium">
+            <a href="#products" class="nav-link">アイテム</a>
+            <a href="#rules" class="nav-link">ルール</a>
+            <a href="#routine" class="nav-link">ルーティン</a>
+        </div>
+        <button id="routine-toggle" class="bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-xs font-bold hover:bg-amber-200 transition">
+            夜モードへ
+        </button>
+    </nav>
+
+    <header class="max-w-4xl mx-auto px-6 pt-12 text-center">
+        <span class="text-amber-600 font-bold tracking-widest text-xs uppercase">The Master Manual</span>
+        <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">毛穴レス肌を叶える<br>ロジカル・スキンケア</h2>
+        <p class="mt-4 text-gray-500 text-sm max-w-lg mx-auto leading-relaxed">
+            厳選された7つのアイテムのポテンシャルを120%引き出し、毛穴の目立たない「陶器肌」を目指すためのインタラクティブ・マニュアルです。
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 mt-16 space-y-24">
+
+        <!-- Section: Component Analysis -->
+        <section id="analysis" class="fade-in">
+            <div class="text-center mb-10">
+                <h3 class="text-xl font-bold">ラインナップの成分バランス</h3>
+                <p class="text-xs text-gray-400 mt-1">全7製品の総合的なアプローチ範囲</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center glass-card p-8">
+                <div class="chart-container">
+                    <canvas id="balanceChart"></canvas>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-bold text-gray-700">全方位毛穴攻略シナジー</h4>
+                    <p class="text-sm leading-relaxed">
+                        このラインナップは、単に洗う・潤すだけでなく、酵母（ガラク）によるキメ補正、レチノールによる代謝促進、ペプチドによる物理的なハリの3方向から毛穴を追い込みます。
+                    </p>
+                    <ul class="text-xs space-y-2 text-gray-500">
+                        <li class="flex items-center"><span class="text-amber-500 mr-2">✦</span> 詰まり毛穴：オイルの乳化技術で解消</li>
+                        <li class="flex items-center"><span class="text-amber-500 mr-2">✦</span> 開き毛穴：水分補給と皮脂抑制で対策</li>
+                        <li class="flex items-center"><span class="text-amber-500 mr-2">✦</span> たるみ毛穴：レチノールとペプチドで引き締め</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Products -->
+        <section id="products" class="scroll-mt-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 space-y-4 md:space-y-0">
+                <div>
+                    <h3 class="text-2xl font-bold">アイテム・プロファイル</h3>
+                    <p class="text-sm text-gray-500">各製品の役割と成分の秘密</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="filterProducts('all')" class="px-3 py-1 text-xs rounded-md bg-gray-200 font-medium filter-btn active">全て</button>
+                    <button onclick="filterProducts('clean')" class="px-3 py-1 text-xs rounded-md bg-white border border-gray-200 text-gray-600 filter-btn">落とす</button>
+                    <button onclick="filterProducts('treat')" class="px-3 py-1 text-xs rounded-md bg-white border border-gray-200 text-gray-600 filter-btn">攻める</button>
+                    <button onclick="filterProducts('protect')" class="px-3 py-1 text-xs rounded-md bg-white border border-gray-200 text-gray-600 filter-btn">守る</button>
+                </div>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Products dynamically injected -->
+            </div>
+        </section>
+
+        <!-- Section: Rules -->
+        <section id="rules" class="scroll-mt-24 bg-stone-100 -mx-6 px-6 py-16 rounded-3xl">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-12">毛穴をゼロにする「3大攻めルール」</h3>
+                <div class="space-y-12">
+                    <!-- Rule 1 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-12 h-12 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xl flex-shrink-0">1</div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-bold text-amber-800">40秒間の徹底乳化</h4>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-600">
+                                魔女工場のオイルを馴染ませた後、**絶対にすぐ流さない**こと。少量の水で手が真っ白（乳化）になるまで混ぜ、その状態で40秒間小鼻をクルクルします。これが角栓をドロッと溶かす最大の秘訣です。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Rule 2 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-start border-t border-stone-200 pt-8">
+                        <div class="w-12 h-12 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xl flex-shrink-0">2</div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-bold text-amber-800">ガラクで皮脂の蛇口を締める</h4>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-600">
+                                ガラクナイアシンは、洗顔後の一番最初かトナー直後に仕込みます。ナイアシンアミドが皮脂分泌を適切にコントロールし、毛穴が物理的に開く「原因」を根元からブロックします。
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Rule 3 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-start border-t border-stone-200 pt-8">
+                        <div class="w-12 h-12 rounded-full bg-amber-600 text-white flex items-center justify-center font-bold text-xl flex-shrink-0">3</div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-bold text-amber-800">夜のレチノール × タンタンクリーム</h4>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-600">
+                                夜限定のコンボ。レチノールが内側から新しい肌を押し上げ、タンタンクリームのペプチドが外側からハリを与えて毛穴の隙間を埋めます。**レチノールは必ず冷蔵庫保管**が鉄則です。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Routine Selection -->
+        <section id="routine" class="scroll-mt-24 pb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold">シチュエーション別ルーティン</h3>
+                <p class="text-sm text-gray-500 mt-2">現在の時間帯に合わせてステップを確認してください</p>
+            </div>
+
+            <div class="flex justify-center mb-10">
+                <div class="bg-gray-100 p-1 rounded-xl inline-flex shadow-inner">
+                    <button onclick="setRoutine('morning')" id="btn-morning" class="px-8 py-2 rounded-lg text-sm font-bold transition-all duration-300 bg-white shadow-sm text-amber-700">☀️ 朝のケア</button>
+                    <button onclick="setRoutine('night')" id="btn-night" class="px-8 py-2 rounded-lg text-sm font-bold transition-all duration-300 text-gray-500">🌙 夜のケア</button>
+                </div>
+            </div>
+
+            <div id="routine-container" class="max-w-2xl mx-auto space-y-8 pl-8 relative">
+                <!-- Routine steps will be injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center text-xs text-gray-400 mt-20">
+        <p>&copy; 2024 Poreless Skincare Logic. For Perfect Porcelain Skin.</p>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                name: "魔女工場 ピュアクレンジングオイル",
+                category: "clean",
+                key: "ホホバオイル",
+                effect: "角栓を溶かす",
+                desc: "厚みのあるリッチなオイル。40秒の乳化で角栓をドロッと溶かし出します。",
+                tag: "詰まり毛穴対策"
+            },
+            {
+                name: "MEDIHEAL ミルクブライトニングトナー",
+                category: "protect",
+                key: "PHA / LHA / ミルク成分",
+                effect: "ごわつき除去",
+                desc: "肌をごわつきをオフし、ミルクの力で肌をふっくら柔らかくして毛穴を隠します。",
+                tag: "くすみ・ごわつき対策"
+            },
+            {
+                name: "COSRX プロポリスシナジートナー",
+                category: "protect",
+                key: "プロポリス 82.6%",
+                effect: "栄養・ツヤ",
+                desc: "内側から発光するようなツヤを与え、乾燥による開き毛穴を予防。",
+                tag: "栄養補給・バリア"
+            },
+            {
+                name: "Torriden ダイブインセラム",
+                category: "protect",
+                key: "5重複合ヒアルロン酸",
+                effect: "インナードライ解消",
+                desc: "肌深部まで水分をチャージ。皮脂の過剰分泌を根本から抑えます。",
+                tag: "水分チャージ"
+            },
+            {
+                name: "魔女工場 ガラクナイアシン2.0/3.0",
+                category: "treat",
+                key: "ガラクトミセス / ナイアシンアミド",
+                effect: "皮脂抑制・キメ",
+                desc: "キメを整え、トーンアップ。皮脂の蛇口を締めて型崩れを防ぎます。",
+                tag: "皮脂・キメ管理"
+            },
+            {
+                name: "COSRX レチノール 0.1 or 0.3",
+                category: "treat",
+                key: "純粋レチノール",
+                effect: "たるみ毛穴・ハリ",
+                desc: "肌のターンオーバーを強力サポート。縦に伸びた毛穴をキュッと引き締めます。",
+                tag: "エイジングケア"
+            },
+            {
+                name: "BIO HEAL BOH タンタンクリーム",
+                category: "protect",
+                key: "3Dペプチド / 乳酸菌",
+                effect: "弾力ホールド",
+                desc: "内側から肌を膨らませ、毛穴の隙間を埋めるように密着。最強の蓋。",
+                tag: "ハリ・弾力対策"
+            }
+        ];
+
+        const routines = {
+            morning: [
+                { step: "1. 洗顔", item: "お好みの洗顔料", detail: "夜の皮脂を優しく落とす。" },
+                { step: "2. 導入・キメ", item: "ガラクナイアシン", detail: "小鼻のテカリ予防に重ね付け推奨。" },
+                { step: "3. 角質・柔軟", item: "ミルクブライトニングトナー", detail: "肌をほぐして次に塗るものの通り道を作る。" },
+                { step: "4. 深層保水", item: "ダイブインセラム", detail: "ヒアルロン酸を肌の奥までしっかり叩き込む。" },
+                { step: "5. 保護・ハリ", item: "3Dタンタンクリーム", detail: "朝は夜の半量を薄く伸ばして仕上げ。" }
+            ],
+            night: [
+                { step: "1. 大掃除", item: "ピュアクレンジングオイル", detail: "40秒の徹底乳化で角栓を撲滅。" },
+                { step: "2. 栄養・保護", item: "プロポリスシナジートナー", detail: "レチノールの刺激から守るクッション役。" },
+                { step: "3. 攻めの毛穴ケア", item: "レチノール 0.1 or 0.3", detail: "気になる部分から。冷蔵庫から出して使用。" },
+                { step: "4. 弾力密封", item: "3Dタンタンクリーム", detail: "レチノールとペプチドの相乗効果で翌朝ふっくら。" }
+            ]
+        };
+
+        let currentRoutine = 'morning';
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 flex flex-col h-full hover:shadow-lg transition fade-in';
+                card.innerHTML = `
+                    <div class="flex-1">
+                        <span class="text-[10px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-bold uppercase tracking-wider">${p.tag}</span>
+                        <h4 class="text-sm font-bold mt-2 text-gray-800 leading-tight h-10 flex items-center">${p.name}</h4>
+                        <div class="mt-4 text-[11px] text-gray-400 font-medium">主要成分</div>
+                        <p class="text-xs text-gray-600 font-bold">${p.key}</p>
+                        <p class="text-[13px] text-gray-500 mt-3 leading-relaxed">${p.desc}</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-amber-600 uppercase tracking-tighter">Effect: ${p.effect}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-gray-200');
+                btn.classList.add('bg-white', 'border-gray-200');
+            });
+            event.target.classList.add('active', 'bg-gray-200');
+            renderProducts(type);
+        }
+
+        function setRoutine(type) {
+            currentRoutine = type;
+            const container = document.getElementById('routine-container');
+            const btnM = document.getElementById('btn-morning');
+            const btnN = document.getElementById('btn-night');
+            const toggle = document.getElementById('routine-toggle');
+
+            container.innerHTML = '';
+            
+            if (type === 'morning') {
+                btnM.classList.add('bg-white', 'shadow-sm', 'text-amber-700');
+                btnM.classList.remove('text-gray-500');
+                btnN.classList.remove('bg-white', 'shadow-sm', 'text-amber-700');
+                btnN.classList.add('text-gray-500');
+                toggle.innerText = "夜モードへ";
+            } else {
+                btnN.classList.add('bg-white', 'shadow-sm', 'text-amber-700');
+                btnN.classList.remove('text-gray-500');
+                btnM.classList.remove('bg-white', 'shadow-sm', 'text-amber-700');
+                btnM.classList.add('text-gray-500');
+                toggle.innerText = "朝モードへ";
+            }
+
+            routines[type].forEach(step => {
+                const div = document.createElement('div');
+                div.className = 'routine-step relative fade-in';
+                div.innerHTML = `
+                    <div class="absolute -left-10 top-0 w-5 h-5 rounded-full bg-white border-2 border-amber-600 z-10"></div>
+                    <div class="glass-card p-4">
+                        <div class="text-[10px] text-amber-600 font-bold uppercase tracking-widest">${step.step}</div>
+                        <h5 class="text-sm font-bold text-gray-800">${step.item}</h5>
+                        <p class="text-xs text-gray-500 mt-1">${step.detail}</p>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['角栓除去', '水分補給', '皮脂抑制', '弾力・ハリ', '透明感', '鎮静・バリア'],
+                    datasets: [{
+                        label: 'ルーティンの構成強度',
+                        data: [95, 90, 85, 95, 80, 75],
+                        backgroundColor: 'rgba(201, 160, 99, 0.2)',
+                        borderColor: 'rgba(201, 160, 99, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(201, 160, 99, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false },
+                            pointLabels: {
+                                font: { size: 10, family: 'Noto Sans JP' },
+                                color: '#6b7280'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            setRoutine('morning');
+            initChart();
+
+            document.getElementById('routine-toggle').addEventListener('click', () => {
+                if (currentRoutine === 'morning') setRoutine('night');
+                else setRoutine('morning');
+            });
+        });
+    </script>
+</body>
+</html>
