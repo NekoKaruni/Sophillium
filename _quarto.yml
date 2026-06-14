@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  # ⚠️【追加】HTMLファイルをサイトのリソースとして認識させます
+  resources:
+    - poreless_guide.html 
 
 website:
   title: "Sophillium"
@@ -22,30 +25,33 @@ website:
 
   sidebar:
     left:
-    style: "docked"
-    collapse-level: 1
-    search: true
-    contents:
-    - section: "理念・洞察"
-      contents: 
-       - text: 概要 
-         href: 01_index.qmd
-    - section: "投資・市場"
-      contents: 
-       - text: 投資・市場 概要
-         href: 02_investment.qmd
-       - text: 詳細解説
-         href: 02_investment_Summary.qmd
-       - text: TOPIX
-         href: TOPIX.qmd
-    - section: "経済・経営"
-      contents: 
-       - text: 経済・経営 概要
-         href: 03_economy_Business_Summary.qmd
-       - text: マクロ経済学
-         href: 03_MacroEconomics.qmd
-       - text: 経営論
-         href: 03_BusinessManagement.qmd
+      style: "docked"
+      collapse-level: 1
+      search: true
+      contents:
+        - section: "理念・洞察"
+          contents: 
+            - text: 概要 
+              href: 01_index.qmd
+        - section: "投資・市場"
+          contents: 
+            - text: 投資・市場 概要
+              href: 02_investment.qmd
+            - text: 詳細解説
+              href: 02_investment_Summary.qmd
+            - text: TOPIX
+              href: TOPIX.qmd
+            # ⚠️【追加案A】「投資・市場」のサイドバーメニュー内に埋め込みページを配置
+            - text: 毛穴レスSPAガイド
+              href: poreless_guide_view.qmd
+        - section: "経済・経営"
+          contents: 
+            - text: 経済・経営 概要
+              href: 03_economy_Business_Summary.qmd
+            - text: マクロ経済学
+              href: 03_MacroEconomics.qmd
+            - text: 経営論
+              href: 03_BusinessManagement.qmd
 
 format: 
   html: 
