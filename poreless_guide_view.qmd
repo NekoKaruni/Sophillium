@@ -1,0 +1,9 @@
+---
+title: "インタラクティブ・スキンケアガイド"
+---
+
+::: column-page
+<iframe src="poreless_guide.html" width="100%" height="800px" style="border:none;">
+
+</iframe>
+:::
